@@ -10,14 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  public ofertas: Array<Oferta> = this.ofertasService.getOfertas();
+  public ofertas: Array<Oferta>;
 
   constructor(private ofertasService: OfertasService) { 
 
   }
 
   ngOnInit(): void {
-    console.log(this.ofertas)
+    // this.ofertas = this.ofertasService.getOfertas();
+  
+    this.ofertasService.getOfertas2().then((resp: Oferta[]) => {
+      this.ofertas = resp;
+    })
   }
 
 }

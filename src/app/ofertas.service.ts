@@ -1,3 +1,4 @@
+import { promises, resolve } from 'dns';
 import { Oferta } from './shared/oferta.model';
 export class OfertasService {
 
@@ -54,6 +55,13 @@ export class OfertasService {
 
 	public getOfertas(): Array<Oferta> {
 		return this.ofertas;
+	}
+
+	public getOfertas2(): Promise<Oferta[]> {
+		return new Promise((resp, error) => {
+			//algum processamento
+			resp(this.ofertas)
+		})
 	}
 
 }
