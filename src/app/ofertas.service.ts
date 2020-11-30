@@ -59,14 +59,26 @@ export class OfertasService {
 	public getOfertas2(): Promise<Oferta[]> {
 		return new Promise((resp, error) => {
 
-			let ok = false;
+			let ok = true;
 
 			if (ok) {
-				resp(this.ofertas);
+				setTimeout(() => {
+					resp(this.ofertas);
+				}, 3000);
 			} else {
 				error({codigo_erro: 404, mensagem_erro: 'Recurso não encontrado'});
 			}
 
+		}).then((ofertas: Oferta[]) => {
+
+			console.log('primeiro then');
+			return ofertas;
+
+		}).then((ofertas: Oferta[]) => {
+			
+			console.log('Segundo then');
+			return ofertas;
+			
 		})
 	}
 
