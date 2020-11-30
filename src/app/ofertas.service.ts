@@ -1,4 +1,3 @@
-import { promises, resolve } from 'dns';
 import { Oferta } from './shared/oferta.model';
 export class OfertasService {
 
@@ -59,8 +58,15 @@ export class OfertasService {
 
 	public getOfertas2(): Promise<Oferta[]> {
 		return new Promise((resp, error) => {
-			//algum processamento
-			resp(this.ofertas)
+
+			let ok = false;
+
+			if (ok) {
+				resp(this.ofertas);
+			} else {
+				error({codigo_erro: 404, mensagem_erro: 'Recurso não encontrado'});
+			}
+
 		})
 	}
 
