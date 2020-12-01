@@ -1,3 +1,4 @@
+import { promises } from 'dns';
 import { Oferta } from './shared/oferta.model';
 export class OfertasService {
 
@@ -77,8 +78,15 @@ export class OfertasService {
 		}).then((ofertas: Oferta[]) => {
 			
 			console.log('Segundo then');
+			return new Promise((resolve2, reject2) => {
+				setTimeout(() => {
+					resolve2(ofertas)
+				}, 3000);
+			})
+
+		}).then((ofertas: Oferta[]) => {
+			console.log('apos tres seg');
 			return ofertas;
-			
 		})
 	}
 
