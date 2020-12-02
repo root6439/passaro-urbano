@@ -1,93 +1,15 @@
-import { promises } from 'dns';
 import { Oferta } from './shared/oferta.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
 export class OfertasService {
 
-	public ofertas: Array<Oferta> = [
-		{
-			id: 1,
-			categoria: "restaurante",
-			titulo: "Super Burger",
-			descricao_oferta: "Rodízio de Mini-hambúrger com opção de entrada.",
-			anunciante: "Original Burger",
-			valor: 29.90,
-			destaque: true,
-			imagens: [
-				{ url: "/assets/ofertas/1/img1.jpg" },
-				{ url: "/assets/ofertas/1/img2.jpg" },
-				{ url: "/assets/ofertas/1/img3.jpg" },
-				{ url: "/assets/ofertas/1/img4.jpg" }
-			]
-		},
-		{
-			id: 2,
-			categoria: "restaurante",
-			titulo: "Cozinha Mexicana",
-			descricao_oferta: "Almoço ou Jantar com Rodízio Mexicano delicioso.",
-			anunciante: "Mexicana",
-			valor: 32.90,
-			destaque: true,
-			imagens: [
-				{ url: "/assets/ofertas/2/img1.jpg" },
-				{ url: "/assets/ofertas/2/img2.jpg" },
-				{ url: "/assets/ofertas/2/img3.jpg" },
-				{ url: "/assets/ofertas/2/img4.jpg" }
-			]
+	constructor(private http: HttpClient) {}
 
-		},
-		{
-			id: 4,
-			categoria: "diversao",
-			titulo: "Estância das águas",
-			descricao_oferta: "Diversão garantida com piscinas, trilhas e muito mais.",
-			anunciante: "Estância das águas",
-			valor: 31.90,
-			destaque: true,
-			imagens: [
-				{ url: "/assets/ofertas/3/img1.jpg" },
-				{ url: "/assets/ofertas/3/img2.jpg" },
-				{ url: "/assets/ofertas/3/img3.jpg" },
-				{ url: "/assets/ofertas/3/img4.jpg" },
-				{ url: "/assets/ofertas/3/img5.jpg" },
-				{ url: "/assets/ofertas/3/img6.jpg" }
-			]
-		}
-	]
-
-	public getOfertas(): Array<Oferta> {
-		return this.ofertas;
-	}
-
-	public getOfertas2(): Promise<Oferta[]> {
-		return new Promise((resp, error) => {
-
-			let ok = true;
-
-			if (ok) {
-				setTimeout(() => {
-					resp(this.ofertas);
-				}, 3000);
-			} else {
-				error({codigo_erro: 404, mensagem_erro: 'Recurso não encontrado'});
-			}
-
-		}).then((ofertas: Oferta[]) => {
-
-			console.log('primeiro then');
-			return ofertas;
-
-		}).then((ofertas: Oferta[]) => {
-			
-			console.log('Segundo then');
-			return new Promise((resolve2, reject2) => {
-				setTimeout(() => {
-					resolve2(ofertas)
-				}, 3000);
-			})
-
-		}).then((ofertas: Oferta[]) => {
-			console.log('apos tres seg');
-			return ofertas;
-		})
+	public getOfertas(): Promise<Oferta[]> {
+		return this.http.get<Oferta[]>('http://localhost:3000/ofertas')
+			.toPromise();
 	}
 
 }
