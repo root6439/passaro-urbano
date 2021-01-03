@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.ofertasService.getOfertas().then( (ofertas: Oferta[]) => {
+    this.ofertasService.getOfertasEmDestaque().then( (ofertas: Oferta[]) => {
       this.ofertas = ofertas;
     }).catch( (param: any) => {
       console.log(param);
