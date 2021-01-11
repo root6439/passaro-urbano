@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { RodapeComponent } from './rodape/rodape.component';
 import { DiversaoComponent } from './diversao/diversao.component';
 import { RestaurantesComponent } from './restaurantes/restaurantes.component';
+import { OfertaComponent } from './oferta/oferta.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RestaurantesComponent } from './restaurantes/restaurantes.component';
     RodapeComponent,
     RestaurantesComponent,
     DiversaoComponent,
+    OfertaComponent,
   ],
   imports: [
     BrowserModule,

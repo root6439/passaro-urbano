@@ -1,7 +1,6 @@
 import { OfertasService } from './../ofertas.service';
 import { Component, OnInit } from '@angular/core';
 import { Oferta } from '../shared/oferta.model';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-diversao',
