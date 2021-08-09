@@ -1,4 +1,6 @@
+import { OfertasService } from './../../ofertas.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-como-usar',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComoUsarComponent implements OnInit {
 
-  constructor() { }
+  public comoUsar: string;
+
+  constructor(
+    private route: ActivatedRoute,
+    private ofertaService: OfertasService
+  ) { }
 
   ngOnInit(): void {
+    let id = this.route.parent.snapshot.params['id'];
+    this.ofertaService.getComoUsarOfertaPorId(id).then((resp: any) => {
+
+      this.comoUsar = resp[0].descricao
+
+    })
   }
 
 }
