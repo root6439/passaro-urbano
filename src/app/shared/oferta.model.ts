@@ -7,6 +7,6 @@ export class Oferta {
 	public anunciante: String;
 	public valor: Number;
 	public destaque: Boolean
-	public imagens: Array<Object>;
+	public imagens: Array<any>;
 
 }
