@@ -12,9 +12,8 @@ import { Observable, Subject, of } from 'rxjs';
 })
 export class TopoComponent implements OnInit, OnDestroy {
 
-  private ofertaSub: Observable<Array<Oferta>>
+  public ofertaSub: Observable<Array<Oferta>>
   private subPesquisa: Subject<string> = new Subject<string>();
-  public ofertas: Array<Oferta>;
 
   constructor(
     private ofertaService: OfertasService
@@ -37,9 +36,6 @@ export class TopoComponent implements OnInit, OnDestroy {
     }
     )
 
-    this.ofertaSub.subscribe((ofertas: Array<Oferta>) => {
-      this.ofertas = ofertas;
-    })
   }
 
   ngOnDestroy(): void {
@@ -49,6 +45,10 @@ export class TopoComponent implements OnInit, OnDestroy {
   public pesquisa(value: string): void {
     console.log("Método pesquisa");
     this.subPesquisa.next(value);
+  }
+
+  public limparPesquisa(): void {
+    this.subPesquisa.next("");
   }
 
 }

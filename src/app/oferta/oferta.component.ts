@@ -1,7 +1,7 @@
 import { Oferta } from './../shared/oferta.model';
 import { OfertasService } from './../ofertas.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-oferta',
@@ -20,10 +20,10 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    let id = this.route.snapshot.params['id'];
-
-    this.ofertaService.getOfertaPorId(id).then((resp: Oferta) => {
-      this.oferta = resp[0];
+    this.route.params.subscribe((param: Params) => {
+      this.ofertaService.getOfertaPorId(param.id).then((resp: Oferta) => {
+        this.oferta = resp[0];
+      })
     })
 
     //alguns exemplos com observable
