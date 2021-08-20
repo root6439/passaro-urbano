@@ -1,3 +1,4 @@
+import { CarrinhoService } from './carrinho.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -46,7 +47,8 @@ registerLocaleData(localePt);
     ReactiveFormsModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-Br' }
+    { provide: LOCALE_ID, useValue: 'pt-Br' },
+    CarrinhoService
   ],
   bootstrap: [AppComponent]
 })

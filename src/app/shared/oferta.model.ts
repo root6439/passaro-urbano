@@ -5,7 +5,7 @@ export class Oferta {
 	public titulo: String;
 	public descricao_oferta: String; 
 	public anunciante: String;
-	public valor: Number;
+	public valor: number;
 	public destaque: Boolean
 	public imagens: Array<any>;
 
