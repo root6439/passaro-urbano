@@ -1,42 +1,48 @@
-import { Pedido } from './../shared/pedido.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service'
+import { Pedido } from '../shared/pedido.model'
 
 @Component({
   selector: 'app-ordem-compra',
   templateUrl: './ordem-compra.component.html',
   styleUrls: ['./ordem-compra.component.css'],
-  providers: [ OrdemCompraService ]
+  providers: [OrdemCompraService]
 })
 export class OrdemCompraComponent implements OnInit {
 
-  @ViewChild('formulario')
-  public form: NgForm;
-
   public idPedido: number;
+
+  public form: FormGroup = new FormGroup({
+    "endereco": new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]),
+    "numero": new FormControl(null, [Validators.required, Validators.minLength(1)]),
+    "complemento": new FormControl(null),
+    "formaDePagamento": new FormControl("", [Validators.required])
+  });
 
   constructor(
     private ordemCompraService: OrdemCompraService
   ) { }
 
   ngOnInit() {
-    
+
   }
 
   public confirmarCompra(): void {
-    
-    let pedido: Pedido = new Pedido(
-      this.form.value.endereco,
-      this.form.value.numero,
-      this.form.value.complemento,
-      this.form.value.formaPagamento
-    );
 
-    this.ordemCompraService.efetivarCompra(pedido).subscribe((idPedido: number) => {
-      this.idPedido = idPedido;
-    }, err => console.log(err))
-    
+    if (this.form.status == "INVALID") {
+      this.form.markAllAsTouched();
+    } else {
+      let pedido: Pedido = new Pedido(
+        this.form.get('endereco').value,
+        this.form.get('numero').value,
+        this.form.get('complemento').value,
+        this.form.get('formaDePagamento').value);
+
+      this.ordemCompraService.efetivarCompra(pedido).subscribe((idPedido: number) => {
+        this.idPedido = idPedido;
+      })
+    }
+
   }
-
 }

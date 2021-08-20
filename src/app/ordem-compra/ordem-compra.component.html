@@ -1,6 +1,6 @@
 <div class="container">
   <div class="ordem-compra" *ngIf="idPedido == undefined">
-    <form novalidate #formulario="ngForm" (ngSubmit)="confirmarCompra()" class="mb-5">
+    <form novalidate [formGroup]="form" (ngSubmit)="confirmarCompra()" class="mb-5">
 
       <h5>Sua Compra</h5>
       <hr />
@@ -68,24 +68,24 @@
       <div class="form-row">
 
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" placeholder="Endereço" autocomplete="off" minlength="5" maxlength="30"
-            required ngModel name="endereco" #inputEndereco="ngModel">
-          <small class="form-text text-danger" *ngIf="!inputEndereco.valid && inputEndereco.touched">
-            Endereço inválido
-          </small>
-          <small class="form-text text-success" *ngIf="inputEndereco.valid && inputEndereco.touched">Ok</small>
+          <input type="text" class="form-control" placeholder="Endereço" autocomplete="off" formControlName="endereco">
+          <small class="form-text text-success"
+            *ngIf="form.get('endereco').valid && form.get('endereco').touched">Ok</small>
+          <small class="form-text text-danger"
+            *ngIf="!form.get('endereco').valid && form.get('endereco').touched">Endereço inválido</small>
         </div>
 
         <div class="form-group col-md-2">
-          <input type="text" class="form-control" placeholder="Número" autocomplete="off" minlength="1" required
-            name="numero" ngModel #inputNumero="ngModel">
-          <small class="form-text text-success" *ngIf="inputNumero.valid && inputNumero.touched">Ok</small>
-          <small class="form-text text-danger" *ngIf="!inputNumero.valid && inputNumero.touched">Número inválido</small>
+          <input type="text" class="form-control" placeholder="Número" autocomplete="off" formControlName="numero">
+          <small class="form-text text-success"
+            *ngIf="form.get('numero').valid && form.get('numero').touched">Ok</small>
+          <small class="form-text text-danger" *ngIf="!form.get('numero').valid && form.get('numero').touched">Número
+            inválido</small>
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off" name="complemento"
-            ngModel>
+          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off"
+            formControlName="complemento">
         </div>
 
       </div>
@@ -97,24 +97,29 @@
       <div class="form-row">
 
         <div class="form-group col-md-3">
-          <select class="form-control" name="formaPagamento" ngModel #selectPagamento="ngModel" required>
+          <select class="form-control" formControlName="formaDePagamento">
             <option value="">Selecione uma opção</option>
             <option value="dinheiro">Dinheiro</option>
             <option value="debito">Débito</option>
           </select>
-          <small class="form-text text-success" *ngIf="selectPagamento.valid && selectPagamento.touched">Ok</small>
-          <small class="form-text text-danger" *ngIf="!selectPagamento.valid && selectPagamento.touched">Forma de
-            pagamento inválida</small>
+          <small class="form-text text-success"
+            *ngIf="form.get('formaDePagamento').valid && form.get('formaDePagamento').touched">Ok</small>
+          <small class="form-text text-danger"
+            *ngIf="!form.get('formaDePagamento').valid && form.get('formaDePagamento').touched">Forma de pagamento
+            inválida</small>
         </div>
       </div>
 
       <hr />
-      <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
+      <!-- <button type="submit" class="btn btn-primary btn-lg" [disabled]=form.invalid>
+        Cofirmar compra
+      </button> -->
+      <button type="submit" class="btn btn-primary btn-lg">
+        Cofirmar compra
+      </button>
     </form>
   </div>
-
   <div *ngIf="idPedido != undefined">
     <app-ordem-compra-sucesso [idPedido]="idPedido"></app-ordem-compra-sucesso>
   </div>
-
 </div>

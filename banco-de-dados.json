@@ -220,6 +220,20 @@
       "complemento": "Prox Musculação",
       "formaPagamento": "dinheiro",
       "id": 5
+    },
+    {
+      "endereco": "opaaa",
+      "numero": "13",
+      "complemento": "asd",
+      "formaPagamento": "dinheiro",
+      "id": 6
+    },
+    {
+      "endereco": "Rua teste",
+      "numero": "111",
+      "complemento": null,
+      "formaPagamento": "dinheiro",
+      "id": 7
     }
   ]
 }
