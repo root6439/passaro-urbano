@@ -13,7 +13,7 @@ export class OrdemCompraService {
     private http: HttpClient
   ) { }
 
-  public efetivarCompra(pedido: Pedido): Observable<Response> {
+  public efetivarCompra(pedido: Pedido): Observable<number> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -21,7 +21,7 @@ export class OrdemCompraService {
       })
     };
 
-    return this.http.post<Response>(`${URL_API}/pedidos`, JSON.stringify(pedido), httpOptions);
+    return this.http.post<number>(`${URL_API}/pedidos`, JSON.stringify(pedido), httpOptions);
   }
 
 }

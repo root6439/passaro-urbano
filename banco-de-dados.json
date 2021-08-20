@@ -213,6 +213,13 @@
       "complemento": "asdasd",
       "formaPagamento": "dinheiro",
       "id": 4
+    },
+    {
+      "endereco": "Rua 123",
+      "numero": "21",
+      "complemento": "Prox Musculação",
+      "formaPagamento": "dinheiro",
+      "id": 5
     }
   ]
 }
