@@ -28,7 +28,6 @@ export class CarrinhoService {
   }
 
   public totalCarrinho(): number {
-
     let total: number = 0;
 
     this.itens.map((item: ItemCarrinho) => {
@@ -36,7 +35,25 @@ export class CarrinhoService {
     })
 
     return total;
+  }
 
+  public diminuirQuantidade(item: ItemCarrinho): void {
+
+    let itemEncontrado = this.itens.find((item2: ItemCarrinho) => item2.oferta.id == item.oferta.id);
+
+    item.quantidade--;
+
+    if (item.quantidade == 0) {
+      this.itens.splice(this.itens.indexOf(itemEncontrado), 1);
+    }
+  }
+
+  public aumentarQuantidade(item: ItemCarrinho): void {
+    item.quantidade++;
+  }
+
+  public limparCarrinho(): void {
+    this.itens = [];
   }
 
 }
