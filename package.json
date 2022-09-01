@@ -1,10 +1,10 @@
 {
   "name": "app2",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js && json-server --watch db.json",
-    "postinstall": "ng build",
+    "start": "node server.js",
+    "postinstall": "ng build && json-server --watch banco-de-dados.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
